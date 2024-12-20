@@ -1,5 +1,6 @@
 from setuptools import setup, find_packages
 import re
+import os
 
 NAME='test-py-repo'
 VERSION='0.3.0'
@@ -31,9 +32,12 @@ results = setup(
     }
 )
 
+# For some reason when running in github the name is wrong...
 for type, _, file in results.dist_files:
     if type == 'sdist':
-        print(f"SDIST={file}")
-
-print(f"NAME={NAME}")
-print(f"VERSION={VERSION}")
+        if file != f"dist/{name}-{VERSION}.tar.gz":
+            print(f"Moving {file} to dist/{name}-{VERSION}.tar.gz")
+            os.rename(file, f"dist/{name}-{VERSION}.tar.gz")
+        print(f"SDIST=dist/{name}-{VERSION}.tar.gz")
+    elif type == 'bdist_wheel':
+        print(f"BDIST_WHEEL={file}")
