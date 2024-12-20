@@ -44,7 +44,7 @@ jobs:
             file_name="test-py-repo-${release#v}.tar.gz"
             download_url="https://github.com/${{ github.repository }}/releases/download/$release/$filename"
             if curl --head --silent --fail "$download_url" > /dev/null; then
-              echo <a href="$download_url">$file_name</a> >> docs/test-py-repo/index.html
+              echo "<a href=\"$download_url\">$file_name</a>" >> docs/test-py-repo/index.html
             fi
           done
           echo "</body></html>" >> docs/test-py-repo/index.html
