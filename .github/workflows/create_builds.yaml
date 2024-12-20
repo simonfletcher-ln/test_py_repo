@@ -26,10 +26,10 @@ jobs:
         id : build
         run: |
           python -m pip install --upgrade pip setuptools wheel
-          python setup.py -q sdist | tee output.txt
-          test ${PIPESTATUS[0]} -eq 0 && cat output.txt >> $GITHUB_OUTPUT
+          python setup.py sdist | tee output.txt
+          test ${PIPESTATUS[0]} -eq 0 && grep '^GITLAB_' output.txt >> $GITHUB_OUTPUT
 
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ steps.build.outputs.SDIST }}
+          files: ${{ steps.build.outputs.GITLAB_SDIST }}

@@ -38,6 +38,6 @@ for type, _, file in results.dist_files:
         if file != f"dist/{name}-{VERSION}.tar.gz":
             print(f"Moving {file} to dist/{name}-{VERSION}.tar.gz")
             os.rename(file, f"dist/{name}-{VERSION}.tar.gz")
-        print(f"SDIST=dist/{name}-{VERSION}.tar.gz")
+        print(f"GITLAB_SDIST=dist/{name}-{VERSION}.tar.gz")
     elif type == 'bdist_wheel':
-        print(f"BDIST_WHEEL={file}")
+        print(f"GITLAB_BDIST_WHEEL={file}")
