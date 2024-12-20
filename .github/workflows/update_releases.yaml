@@ -43,7 +43,7 @@ jobs:
           releases=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases | jq -r '.[].tag_name')
           for release in $releases; do
             file_name="test-py-repo-${release#v}.tar.gz"
-            download_url="https://github.com/${{ github.repository }}/releases/download/$release/$filename"
+            download_url="https://github.com/${{ github.repository }}/releases/download/$release/$file_name"
             if curl --head --silent --fail "$download_url" > /dev/null; then
               echo "<a href=\"$download_url\">$file_name</a>" >> docs/test-py-repo/index.html
             else
