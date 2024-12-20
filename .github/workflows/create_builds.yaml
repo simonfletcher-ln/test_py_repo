@@ -30,6 +30,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }} 
-          asset_path: ${{ steps.build.outputs.sdist_file }}
-          asset_name: test-py-repo-${{ steps.build.outputs.sdist_file }}.tar.gz
+          asset_path: ${{ steps.build.outputs.SDIST }}
+          asset_name: ${{ steps.build.outputs.NAME }}-${{ steps.build.outputs.VERSION }}.tar.gz
           asset_content_type: application/octet-stream
