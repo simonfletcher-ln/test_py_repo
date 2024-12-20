@@ -21,3 +21,6 @@ results = setup(
     entry_points={
     }
 )
+
+
+print (results.dist_files)
