@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-setup(
+results = setup(
     name='test-py-repo',
     version='0.3.0',
     packages=find_packages(),
@@ -11,7 +11,7 @@ setup(
     description='A test project',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='',
+    url='https://github.com/simonfletcher-ln/test_py_repo',
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',

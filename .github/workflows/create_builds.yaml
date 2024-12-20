@@ -17,13 +17,13 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install build dependencies
+      - name: Build
+        id : build
         run: |
           python -m pip install --upgrade pip setuptools wheel
-
-      - name: Build package
-        run: |
-          python setup.py sdist bdist_wheel
+          python setup.py sdist
+          TAG=${{ github.event.release.tag_name }}
+          echo "VERSION=${TAG#v}" >> $GITHUB_ENV
 
       - name: Upload Release Assets
         uses: actions/upload-release-asset@v1
@@ -31,6 +31,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }} 
-          asset_path: dist/*
-          asset_name: ${{ github.event.repository.name }}-${{ github.ref }}
+          asset_path: dist/test-py-repo-${VERSION}.tar.gz
+          asset_name: test-py-repo-${VERSION}.tar.gz
           asset_content_type: application/octet-stream
