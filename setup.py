@@ -3,7 +3,7 @@ import re
 import os
 
 NAME='test-py-repo'
-VERSION='0.3.0'
+VERSION='0.4.0'
 
 def normalise(name):
     return re.sub(r"[-_.]+", "-", name).lower()
