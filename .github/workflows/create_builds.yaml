@@ -26,8 +26,9 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           python setup.py sdist | tee output.txt
           test ${PIPESTATUS[0]} -eq 0
-          if [ "v$(grep -q 'GITLAB_VERSION' output.txt)" != "${{ github.event.release.tag_name }}" ]; then
-            echo "::error::Version mismatch between setup.py and release tag"
+          SETUP_VERSION=$(awk -F '=' '/GITLAB_VERSION/{print $2}' output.txt)
+          if [ "v$SETUP_VERSION" != "${{ github.event.release.tag_name }}" ]; then
+            echo "::error::Version mismatch between setup.py (v$SETUP_VERSION) and release tag (${{ github.event.release.tag_name }})"
             exit 1
           fi
           grep '^GITLAB_' output.txt >> $GITHUB_OUTPUT
