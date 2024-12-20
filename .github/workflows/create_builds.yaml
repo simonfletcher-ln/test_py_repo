@@ -5,9 +5,7 @@ on:
     types: [published]
 
 permissions:
-  contents: read
-  attestations: write
-  packages: write
+  contents: write
 
 jobs:
   build:
