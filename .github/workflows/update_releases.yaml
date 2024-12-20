@@ -28,6 +28,7 @@ jobs:
         uses: actions/configure-pages@v5
       - name: generate doc
         run: |
+          set -x
           mkdir docs/test-py-repo
           cat <<EOF > docs/test-py-repo/index.html
           <!DOCTYPE html>
@@ -45,6 +46,8 @@ jobs:
             download_url="https://github.com/${{ github.repository }}/releases/download/$release/$filename"
             if curl --head --silent --fail "$download_url" > /dev/null; then
               echo "<a href=\"$download_url\">$file_name</a>" >> docs/test-py-repo/index.html
+            else
+              echo "Skipping $download_url as it does not exist"
             fi
           done
           echo "</body></html>" >> docs/test-py-repo/index.html
