@@ -32,6 +32,9 @@ results = setup(
     }
 )
 
+print(f"GITLAB_NAME={name}")
+print(f"GITLAB_VERSION={VERSION}")
+
 # For some reason when running in github the name is wrong...
 for type, _, file in results.dist_files:
     if type == 'sdist':

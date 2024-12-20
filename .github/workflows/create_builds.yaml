@@ -25,7 +25,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip setuptools wheel
           python setup.py sdist | tee output.txt
-          test ${PIPESTATUS[0]} -eq 0 && grep '^GITLAB_' output.txt >> $GITHUB_OUTPUT
+          test ${PIPESTATUS[0]} -eq 0
+          test "v$(grep -q 'GITLAB_VERSION' output.txt)" == "${{ github.event.release.tag_name }}"
+          grep '^GITLAB_' output.txt >> $GITHUB_OUTPUT
 
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v2
